@@ -27,4 +27,12 @@ class StreamUtilsTest {
         List<String> result = streamUtils.getUpperCaseDescendedOrder(input);
         assertTrue(expected.equals(result));
     }
+
+    @Test
+    void arraySort() {
+        String[] input = new String[]{"1, 2, 0", "4, 5"};
+        String expected = "0, 1, 2, 4, 5";
+        String result = streamUtils.arraySort(input);
+        assertTrue(result.equals(expected));
+    }
 }
