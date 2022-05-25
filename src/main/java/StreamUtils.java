@@ -18,7 +18,7 @@ public class StreamUtils {
     //task 2
     public List<String> getUpperCaseDescendedOrder(List<String> input) {
         return input.stream()
-                .map(s -> s.toUpperCase())
+                .map(String::toUpperCase)
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
@@ -37,12 +37,13 @@ public class StreamUtils {
     public Stream<Long> getStreamRandomLong(Long seed, Long a, Long c, Long m) {
         return Stream.iterate(new Long[]{seed, a, c, m}, n -> new Long[]{(n[1] * n[0] + n[2]) % n[3], n[1], n[2], n[3]}).map(n -> n[0]);
     }
+
     //task 5
-    public static <T> Stream<T> zip(Stream<T> first, Stream<T> second){
+    public static <T> Stream<T> zip(Stream<T> first, Stream<T> second) {
         Iterator<T> iteratorFirst = first.iterator();
         Iterator<T> iteratorSecond = second.iterator();
         Stream<T> resultStream = Stream.empty();
-        while (iteratorFirst.hasNext() && iteratorSecond.hasNext()){
+        while (iteratorFirst.hasNext() && iteratorSecond.hasNext()) {
             resultStream = Stream.concat(resultStream, Stream.of(iteratorFirst.next(), iteratorSecond.next()));
         }
         return resultStream;
