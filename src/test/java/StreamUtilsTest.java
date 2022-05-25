@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,5 +35,11 @@ class StreamUtilsTest {
         String expected = "0, 1, 2, 4, 5";
         String result = streamUtils.arraySort(input);
         assertTrue(result.equals(expected));
+    }
+
+    @Test
+    void getStreamRandomLong() {
+        Stream<Long> random = streamUtils.getStreamRandomLong(1L, 25214903917L, 11L, (long) Math.pow(2, 48));
+        random.limit(10).forEach(x -> System.out.print(x + " "));
     }
 }

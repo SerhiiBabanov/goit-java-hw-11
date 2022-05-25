@@ -21,12 +21,19 @@ public class StreamUtils {
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
-    public String arraySort(String[] strings){
+
+    //task 3
+    public String arraySort(String[] strings) {
         return Arrays.stream(strings)
                 .flatMap(s -> Stream.of(s.split(", ")))
                 .map(Integer::valueOf)
                 .sorted(Integer::compareTo)
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
+    }
+
+    //task 4
+    public Stream<Long> getStreamRandomLong(Long seed, Long a, Long c, Long m) {
+        return Stream.iterate(new Long[]{seed, a, c, m}, n -> new Long[]{(n[1] * n[0] + n[2]) % n[3], n[1], n[2], n[3]}).map(n -> n[0]);
     }
 }
