@@ -12,7 +12,7 @@ public class StreamUtils {
         return IntStream.range(0, input.size())
                 .filter(n -> n % 2 != 0)
                 .mapToObj(input::get)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     //task 2
@@ -35,7 +35,8 @@ public class StreamUtils {
 
     //task 4
     public Stream<Long> getStreamRandomLong(Long seed, Long a, Long c, Long m) {
-        return Stream.iterate(new Long[]{seed, a, c, m}, n -> new Long[]{(n[1] * n[0] + n[2]) % n[3], n[1], n[2], n[3]}).map(n -> n[0]);
+        return Stream.iterate(new Long[]{seed, a, c, m}, n -> new Long[]{(n[1] * n[0] + n[2]) % n[3], n[1], n[2], n[3]})
+                .map(n -> n[0]);
     }
 
     //task 5
