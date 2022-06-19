@@ -1,7 +1,4 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -39,14 +36,31 @@ public class StreamUtils {
                 .map(n -> n[0]);
     }
 
-    //task 5
+    //    //task 5 - if result  zip(12345,67890) -> 1627384950
+//    public static <T> Stream<T> zip(Stream<T> first, Stream<T> second) {
+//        Iterator<T> iteratorFirst = first.iterator();
+//        Iterator<T> iteratorSecond = second.iterator();
+//        Stream<T> resultStream = Stream.empty();
+//        while (iteratorFirst.hasNext() && iteratorSecond.hasNext()) {
+//            resultStream = Stream.concat(resultStream, Stream.of(iteratorFirst.next(), iteratorSecond.next()));
+//        }
+//        return resultStream;
+//    }
+    //task 5 new - if result zip(12345,67890) -> random order with random length
     public static <T> Stream<T> zip(Stream<T> first, Stream<T> second) {
-        Iterator<T> iteratorFirst = first.iterator();
-        Iterator<T> iteratorSecond = second.iterator();
+        Iterator<T>[] iterators = new Iterator[2];
+        iterators[0] = first.iterator();
+        iterators[1] = second.iterator();
+        Random rand = new Random();
         Stream<T> resultStream = Stream.empty();
-        while (iteratorFirst.hasNext() && iteratorSecond.hasNext()) {
-            resultStream = Stream.concat(resultStream, Stream.of(iteratorFirst.next(), iteratorSecond.next()));
+        Iterator<T> a = iterators[rand.nextInt(0,2)];
+        Iterator<T> b = iterators[rand.nextInt(0,2)];
+        while (a.hasNext() && b.hasNext()){
+            a = iterators[rand.nextInt(0,2)];
+            b = iterators[rand.nextInt(0,2)];
+            resultStream = Stream.concat(resultStream, Stream.of(a.next(), b.next()));
         }
         return resultStream;
     }
+
 }
